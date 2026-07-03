@@ -19,9 +19,3 @@ RUN BACKOFFS="10 20 30 60 90" && for i in 1 2 3 4 5; do HF_TOKEN=$HF_TOKEN comfy
 # user-provided inputs override the auto-generated placeholders above.
 RUN wget --progress=dot:giga -O '/comfyui/input/tee_shorts.jpeg' "https://cool-anteater-319.convex.cloud/api/storage/334739c2-0ef4-467c-8a3c-21da0fbc5e88"
 RUN wget --progress=dot:giga -O '/comfyui/input/guy_with_shorts_backgrounf.jpeg' "https://cool-anteater-319.convex.cloud/api/storage/b9af9b16-d2d4-4871-a0c3-fbb5b639bc4b"
-
-# Force Python to dump console output instantly instead of caching/buffering it
-ENV PYTHONUNBUFFERED=1
-
-# Start ComfyUI and dynamically locate and execute your handler file
-CMD ["bash", "-c", "python3 /comfyui/main.py --listen 127.0.0.1 --port 8188 & python3 $(find / -maxdepth 2 -name '*handler.py' | head -n 1)"]
